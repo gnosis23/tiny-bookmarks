@@ -5,15 +5,41 @@
   "main": "app/main/index.js",
   "scripts": {
     "start:main": "electron .",
-    "start:render": "cd app/renderer/src/main && npm start"
+    "start:render": "cd app/renderer/src/main && npm start",
+    "build": "cd app/renderer/src/main && BUILD_PATH='../../pages/main' npm run build",
+    "pack:mac": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --mac",
+    "pack:win": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --win --ia32"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^13.1.7"
+    "cross-env": "^7.0.3",
+    "electron": "^13.1.7",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "electron-is-dev": "^2.0.0"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "build": {
+    "appId": "work.bohao.add1",
+    "productName": "add1",
+    "files": "app",
+    "extraFiles": [
+      "app/renderer/**/src"
+    ],
+    "directories": {
+      "buildResources": "resource",
+      "output": "release"
+    },
+    "asar": false,
+    "copyright": "Copyright 2021 bohaowang",
+    "mac": {
+      "target": ["dmg", "zip"]
+    },
+    "dmg": {
+      "window": {"width": 540, "height": 380}
+    }
   }
 }

@@ -11,9 +11,14 @@ app.on('ready', () => {
       contextIsolation: false,
     }
   });
+
   if (isDev) {
     win.loadURL('http://localhost:3000');
   } else {
     win.loadFile(path.resolve(__dirname, '../renderer/pages/main/index.html'));
   }
+
+  app.on('window-all-closed', () => {
+    app.quit();
+  });
 });

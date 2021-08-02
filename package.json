@@ -40,6 +40,15 @@
     },
     "dmg": {
       "window": {"width": 540, "height": 380}
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "language": "2052",
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }

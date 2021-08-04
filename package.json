@@ -6,7 +6,7 @@
   "scripts": {
     "start:main": "electron .",
     "start:render": "cd app/renderer/src/main && npm start",
-    "build": "cd app/renderer/src/main && BUILD_PATH='../../pages/main' npm run build",
+    "build": "cd app/renderer/src/main && cross-env BUILD_PATH='../../pages/main' npm run build",
     "pack:mac": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --mac",
     "pack:win": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --win --ia32"
   },
@@ -58,5 +58,8 @@
       "perMachine": true,
       "allowToChangeInstallationDirectory": true
     }
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

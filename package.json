@@ -36,12 +36,20 @@
     "asar": false,
     "copyright": "Copyright 2021 bohaowang",
     "mac": {
-      "target": ["dmg", "zip"]
+      "target": ["dmg", "zip"],
+      "icon": "resource/icon.icns"
     },
     "dmg": {
-      "window": {"width": 540, "height": 380}
+      "background": "resource/background.png",
+      "window": {"width": 540, "height": 380},
+      "contents": [
+        { "x": 410, "y": 180, "type": "link", "path": "/Applications" },
+        { "x": 130, "y": 180, "type": "file" }
+      ],
+      "iconSize": 128
     },
     "win": {
+      "icon": "resource/icon.ico",
       "target": ["nsis"]
     },
     "nsis": {

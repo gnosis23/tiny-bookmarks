@@ -1,0 +1,64 @@
+# Workflow's name
+name: Build Electron App for Mac/Win
+
+# Workflow's trigger
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+# Workflow's jobs
+jobs:
+  release:
+    name: build and release electron app
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-2019, macos-10.15]
+
+    steps:
+      - name: Check out git repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2-beta
+
+      - name: npm install
+        run: |
+          npm install
+
+      - name: build windows app
+        if: matrix.os == 'windows-2019'
+        run: |
+          npm run dist:win
+
+      - name: build mac app
+        if: matrix.os == 'macos-10.15'
+        run: |
+          npm run dist:mac
+
+      - name: cleanup artifacts windows
+        if: matrix.os == 'windows-2019'
+        run: |
+          npx rimraf "release/!(*.exe)"
+
+      - name: cleanup artifacts mac
+        if: matrix.os == 'macos-10.15'
+        run: |
+          npx rimraf "release/!(*.dmg)"
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}
+          path: release
+
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "release/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -8,7 +8,9 @@
     "start:render": "cd app/renderer/src/main && npm start",
     "build": "cd app/renderer/src/main && cross-env BUILD_PATH='../../pages/main' npm run build",
     "pack:mac": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --mac",
-    "pack:win": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --win --ia32"
+    "pack:win": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --win --ia32",
+    "dist:mac": "npm run build && npm run pack:mac",
+    "dist:win": "npm run build && npm run pack:win"
   },
   "keywords": [],
   "author": "",

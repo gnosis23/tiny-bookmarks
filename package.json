@@ -27,15 +27,16 @@
   "build": {
     "appId": "work.bohao.add1",
     "productName": "add1",
-    "files": "app",
-    "extraFiles": [
-      "app/renderer/**/src"
+    "files": [
+      "app/main",
+      "app/renderer/pages"
     ],
+    "extraFiles": [],
     "directories": {
       "buildResources": "resource",
       "output": "release"
     },
-    "asar": false,
+    "asar": true,
     "copyright": "Copyright 2021 bohaowang",
     "mac": {
       "target": ["dmg", "zip"],

@@ -6,6 +6,7 @@ export default function Home() {
   const [count, setCount] = useState(1);
   const [data, setData] = useState([]);
   const [items, setItems] = useState([]);
+  const [fingerprint, setFingerprint] = useState(null);
 
   useEffect(() => {
     ipcRenderer.send('fetchRepo');
@@ -16,6 +17,10 @@ export default function Home() {
     ipcRenderer.on('async-message-reply', (event, arg) => {
       setItems(arg);
     });
+    ipcRenderer.send('fingerprint');
+    ipcRenderer.on('fingerprint-reply', (event, arg) => {
+      setFingerprint(arg);
+    });
   }, []);
 
   return (
@@ -24,6 +29,7 @@ export default function Home() {
         <section>{count}</section>
         <button onClick={() => setCount(x => x + 1)}>Add 1</button>
       </header>
+      <div>fingerprint: {fingerprint}</div>
       <div className={styles.list}>
         {data.map(item => (
           <div key={item.id} className={styles.repo}>{item.name}</div>

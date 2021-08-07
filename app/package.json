@@ -10,8 +10,8 @@
   "devDependencies": {},
   "dependencies": {
     "electron-is-dev": "^2.0.0",
-    "node-fetch": "^2.6.1",
-    "sqlite3": "^5.0.2"
+    "geektime-fringerprint-example": "^1.0.0",
+    "node-fetch": "^2.6.1"
   },
   "postinstall": "electron-builder install-app-deps"
 }

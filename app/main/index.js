@@ -2,7 +2,7 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
 const fetch = require('node-fetch');
 const path = require('path');
-const sqlite = require('sqlite3');
+const fingerprint = require('geektime-fringerprint-example');
 
 let mainWindow;
 
@@ -37,22 +37,10 @@ ipcMain.on('fetchRepo', () => {
   })
 });
 
-// sqlite test
-const database = new sqlite.Database(path.join(app.getPath('userData'), 'bookmarks.sqlite'), err => {
-  if (err) console.error('Database opening error: ', err);
+ipcMain.on('async-message', (event) => {
+  event.reply('async-message-reply', [{id: 1}]);
 });
 
-database.serialize(function() {
-    database.run("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT);\n")
-    database.run("INSERT INTO messages values (1);\n", [], err => {
-      console.error(err);
-    });
-});
-
-ipcMain.on('async-message', (event, arg) => {
-  const sql = 'select * from messages';
-  database.all(sql, (err, rows) => {
-    console.log(err, rows);
-    event.reply('async-message-reply', err || rows);
-  });
+ipcMain.on('fingerprint', (event) => {
+  event.reply('fingerprint-reply', fingerprint.getFringerprint());
 });

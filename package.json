@@ -1,9 +1,9 @@
 {
   "name": "tiny-bookmarks",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "scripts": {
-    "start:main": "electron .",
+    "start:main": "electron app/main",
     "start:render": "cd app/renderer/src/main && npm start",
     "build": "cd app/renderer/src/main && cross-env BUILD_PATH='../../pages/main' npm run build",
     "pack:mac": "cross-env npm_config_electron_mirror=\"https://npm.taobao.org/mirrors/electron/\" electron-builder build --mac",
@@ -31,8 +31,9 @@
       "output": "release"
     },
     "files": [
-      "main",
-      "renderer/pages",
+      "main/",
+      "renderer/pages/",
+      "node_modules/",
       "package.json"
     ],
     "extraFiles": [],

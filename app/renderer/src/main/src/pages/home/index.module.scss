@@ -1,11 +1,33 @@
 .container {
   font-size: 14px;
-  padding: 6px;
+  padding: 20px;
+  header {
+    display: flex;
+  }
   button {
     padding: 6px 12px;
+    margin-left: 6px;
   }
   section {
     font-size: 26px;
     color: blue;
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+    .repo {
+      width: 7rem;
+      height: 7rem;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 5px #eee;
+      border-radius: 2px;
+      font-size: 16px;
+      color: pink;
+      line-height: 22px;
+      padding: 5px;
+    }
   }
 }

@@ -1,9 +1,12 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
+const fetch = require('node-fetch');
 const path = require('path');
 
+let mainWindow;
+
 app.on('ready', () => {
-  win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 600,
     webPreferences: {
@@ -13,12 +16,22 @@ app.on('ready', () => {
   });
 
   if (isDev) {
-    win.loadURL('http://localhost:3000');
+    mainWindow.loadURL('http://localhost:3000');
   } else {
-    win.loadFile(path.resolve(__dirname, '../renderer/pages/main/index.html'));
+    mainWindow.loadFile(path.resolve(__dirname, '../renderer/pages/main/index.html'));
   }
 
   app.on('window-all-closed', () => {
     app.quit();
   });
+});
+
+ipcMain.on('fetchRepo', () => {
+  fetch('https://api.github.com/users/gnosis23/repos', {
+    headers: {
+      Accept: 'application/vnd.github.v3+json'
+    }
+  }).then(res => res.json()).then(data => {
+    mainWindow.webContents.send('getRepo', data);
+  })
 });

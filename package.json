@@ -37,7 +37,9 @@
       "package.json"
     ],
     "extraFiles": [],
-    "asar": true,
+    "asar": {
+      "smartUnpack": true
+    },
     "copyright": "Copyright 2021 bohaowang",
     "mac": {
       "target": ["dmg", "zip"],

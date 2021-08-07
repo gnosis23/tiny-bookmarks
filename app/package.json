@@ -1,0 +1,15 @@
+{
+  "name": "tiny-bookmarks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main/index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "electron-is-dev": "^2.0.0"
+  },
+  "postinstall": "electron-builder install-app-deps"
+}

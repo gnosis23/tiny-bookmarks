@@ -2,7 +2,6 @@
   "name": "tiny-bookmarks",
   "version": "1.0.0",
   "description": "",
-  "main": "app/main/index.js",
   "scripts": {
     "start:main": "electron .",
     "start:render": "cd app/renderer/src/main && npm start",
@@ -27,15 +26,16 @@
   "build": {
     "appId": "work.bohao.add1",
     "productName": "add1",
-    "files": [
-      "app/main",
-      "app/renderer/pages"
-    ],
-    "extraFiles": [],
     "directories": {
       "buildResources": "resource",
       "output": "release"
     },
+    "files": [
+      "main",
+      "renderer/pages",
+      "package.json"
+    ],
+    "extraFiles": [],
     "asar": true,
     "copyright": "Copyright 2021 bohaowang",
     "mac": {
